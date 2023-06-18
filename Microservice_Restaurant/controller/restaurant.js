@@ -44,9 +44,13 @@ exports.createRestaurant = async (req, res) => {
 // Edit a restaurant
 exports.updateRestaurant = async (req, res) => {
   try {
-    const restaurant = await Restaurant.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+    const restaurant = await Restaurant.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+      }
+    );
     if (!restaurant) {
       return res.status(404).json({ error: "Restaurant not found" });
     }

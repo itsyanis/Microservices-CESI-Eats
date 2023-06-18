@@ -18,10 +18,12 @@ const menuSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  content: {
-    type: Array,
-    required: true,
-  },
+  articles: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Article",
+    },
+  ],
   price: {
     type: Number,
     required: true,
