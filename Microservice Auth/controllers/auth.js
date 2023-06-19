@@ -82,7 +82,7 @@ class AuthController {
           expiresIn: "1h", // Le token expirera après 1 heure
         });
 
-        return res.status(200).json({ token });
+        return res.status(200).json({ user: user, token: token });
       });
     });
   }
