@@ -6,7 +6,7 @@ exports.createArticle = async (req, res) => {
     const { restaurantId, name, image, description, price, type } = req.body;
 
     const newArticle = new Article({
-      restaurantId: mongoose.Types.ObjectId(), // Génère un nouvel ObjectId
+      restaurantId,                 
       name,
       image,
       description,
@@ -14,6 +14,7 @@ exports.createArticle = async (req, res) => {
       type,
     });
 
+    console.log(newArticle);
     const savedArticle = await newArticle.save();
 
     res.status(201).json({

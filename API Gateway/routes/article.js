@@ -41,7 +41,6 @@ router.get("/", async (req, res) => {
 // Get all restaurant's articles
 router.get("/restaurant/:id", async (req, res) => {
   try {
-    console.log("here");
     const { id } = req.params;
     const response = await axios.get(
       `${config.articleMicroserviceURL}/articles/restaurant/${id}`
