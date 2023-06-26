@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 
 // Route handling
 app.use("/auth", authRoutes);
+app.use("/restaurant", articleRoutes);
 app.use("/orders", verifyToken, orderRoutes);
 app.use("/menu", verifyToken, orderRoutes);
 app.use("/articles", verifyToken, articleRoutes);
