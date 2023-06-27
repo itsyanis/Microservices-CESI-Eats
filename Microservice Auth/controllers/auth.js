@@ -40,9 +40,28 @@ class AuthController {
               return res.status(500).json({ error: "Internal server error" });
             }
 
-            return res
-              .status(201)
-              .json({ message: "User registered successfully" });
+            // Récupérer l'ID de l'utilisateur nouvellement inséré
+            const userId = result.insertId;
+
+            // Définir le rôle par défaut "admin" (5) pour l'utilisateur
+            const insertUserRoleQuery =
+              "INSERT INTO role_user (user_id, role_id) VALUES (?, ?)";
+            connection.query(
+              insertUserRoleQuery,
+              [userId, 5], // 5 correspond à l'ID du rôle "admin"
+              (err) => {
+                if (err) {
+                  console.error("Error executing query:", err);
+                  return res
+                    .status(500)
+                    .json({ error: "Internal server error" });
+                }
+
+                return res
+                  .status(201)
+                  .json({ message: "User registered successfully" });
+              }
+            );
           }
         );
       });
@@ -53,7 +72,13 @@ class AuthController {
     const { email, password } = req.body;
 
     // Vérifier si l'utilisateur existe
-    const getUserQuery = "SELECT * FROM users WHERE email = ?";
+    const getUserQuery = `
+        SELECT users.*, roles.name AS role
+        FROM users
+        LEFT JOIN role_user ON users.id = role_user.user_id
+        LEFT JOIN roles ON role_user.role_id = roles.id
+        WHERE email = ?
+    `;
     connection.query(getUserQuery, [email], (err, rows) => {
       if (err) {
         console.error("Error executing query:", err);
@@ -79,7 +104,7 @@ class AuthController {
 
         // Générer un JWT (JSON Web Token)
         const token = jwt.sign({ userId: user.id }, jwtSecret, {
-          expiresIn: "1h", // Le token expirera après 1 heure
+          expiresIn: "2h", // Le token expirera après 2 heure
         });
 
         return res.status(200).json({ user: user, token: token });
