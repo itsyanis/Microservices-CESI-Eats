@@ -7,13 +7,14 @@ const bodyParser = require("body-parser");
 const authRoutes = require("./routes/auth");
 const orderRoutes = require("./routes/order");
 const articleRoutes = require("./routes/article");
+const restaurantRoutes = require("./routes/restaurent");
 
 const app = express();
 app.use(bodyParser.json());
 
 // Route handling
 app.use("/auth", authRoutes);
-app.use("/restaurant", articleRoutes);
+app.use("/restaurant", restaurantRoutes);
 app.use("/orders", verifyToken, orderRoutes);
 app.use("/menu", verifyToken, orderRoutes);
 app.use("/articles", verifyToken, articleRoutes);

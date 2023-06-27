@@ -23,6 +23,17 @@ exports.getRestaurantById = async (req, res) => {
   }
 };
 
+// Get all restaurants of a particular owner
+exports.getRestaurantsByOwner = async (req, res) => {
+  const owner = req.params.ownerId;
+  try {
+    const restaurants = await Restaurant.find({ owner });
+    res.status(200).json(restaurants);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 // Create a restaurant
 exports.createRestaurant = async (req, res) => {
   try {

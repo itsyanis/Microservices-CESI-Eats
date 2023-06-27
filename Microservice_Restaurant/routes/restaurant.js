@@ -8,6 +8,9 @@ router.get("/", restaurantController.getAllRestaurants);
 // Obtenir un restaurant par ID
 router.get("/:id", restaurantController.getRestaurantById);
 
+// Obtenir un restaurant par ID Owner
+router.get("/owner/:ownerId", restaurantController.getRestaurantsByOwner);
+
 // Créer un nouveau restaurant
 router.post("/", restaurantController.createRestaurant);
 
