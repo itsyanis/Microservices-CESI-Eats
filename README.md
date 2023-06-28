@@ -14,13 +14,42 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
 pip install foobar
 ```
 
+## Installation
+
+First clone the repository 
+```bash
+git clone https://github.com/itsyanis/Microservices-CESI-Eats.git
+```
+Make sure you have node and npm installed
+
+```bash
+node -v
+npm -v 
+```
+
+```bash
+cd <Microservice_name>
+cd "Microservice Order"
+```
+
+Copier puis rennomer le fichier .env.example et mettre à jour les informations
+
+```bash
+cp .env.example .env
+```
+
+```bash
+npm install
+```
+
+```bash
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+nodemon app 
+```
+
+Faire les memes etapes pour les autres microservices 
 
 ## Contributing
 
 Pull requests are welcome :) but please open an issue first
 to discuss what you would like to change.
-
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
